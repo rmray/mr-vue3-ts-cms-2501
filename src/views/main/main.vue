@@ -20,6 +20,8 @@ function minus(num: number) {
     <div class="show">当前计数：{{ counterStore.count }}</div>
     <button class="btn-add" @click="plus(5)">+5</button>
     <button class="btn-add" @click="minus(5)">-5</button>
+
+    <el-button type="primary">按钮1</el-button>
   </div>
 </template>
 
