@@ -1,13 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+  <div class="main">main</div>
 </template>
 
 <style lang="less" scoped>
-.app {
+.main {
   color: inherit;
 }
 </style>
