@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useCounterStore from '@/store/modules/counter'
 
+import '@/utils/request/index'
+
 // 获取store
 const counterStore = useCounterStore()
 
@@ -13,6 +15,8 @@ function plus(num: number) {
 function minus(num: number) {
   counterStore.minusAction(num)
 }
+
+// 请求网络
 </script>
 
 <template>
