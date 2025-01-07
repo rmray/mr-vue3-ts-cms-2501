@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 
-let name = 'test'
+// const name = 'test'
 
 // test.name
 
