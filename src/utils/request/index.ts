@@ -9,19 +9,19 @@ const mrRequest = new MrRequest({
   // 实例拦截器-使用
   interceptors: {
     requestInterceptor: (config) => {
-      console.log('实例拦截器: requestInterceptor')
+      // console.log('实例拦截器: requestInterceptor')
       return config
     },
     requestInterceptorCatch: (err: any) => {
-      console.log('实例拦截器: requestInterceptorCatch')
+      // console.log('实例拦截器: requestInterceptorCatch')
       return err
     },
     responseInterceptor: (res) => {
-      console.log('实例拦截器: responseInterceptor')
+      // console.log('实例拦截器: responseInterceptor')
       return res
     },
     responseInterceptorCatch: (err) => {
-      console.log('实例拦截器: responseInterceptorCatch')
+      // console.log('实例拦截器: responseInterceptorCatch')
       return err
     },
   },
@@ -29,30 +29,31 @@ const mrRequest = new MrRequest({
 
 export default mrRequest
 
-mrRequest
-  .request<HomeData>({
-    url: '/home/multidata',
+// 测试请求
+// mrRequest
+//   .request<HomeData>({
+//     url: '/home/multidata',
 
-    // 请求拦截器-使用
-    interceptors: {
-      requestInterceptor: (config) => {
-        console.log('请求拦截器: requestInterceptor')
-        return config
-      },
-      requestInterceptorCatch: (err: any) => {
-        console.log('请求拦截器: requestInterceptorCatch')
-        return err
-      },
-      responseInterceptor: (res) => {
-        console.log('请求拦截器: responseInterceptor')
-        return res
-      },
-      responseInterceptorCatch: (err) => {
-        console.log('请求拦截器: responseInterceptorCatch')
-        return err
-      },
-    },
-  })
-  .then((res) => {
-    console.log(res.data)
-  })
+//     // 请求拦截器-使用
+//     interceptors: {
+//       requestInterceptor: (config) => {
+//         // console.log('请求拦截器: requestInterceptor')
+//         return config
+//       },
+//       requestInterceptorCatch: (err: any) => {
+//         // console.log('请求拦截器: requestInterceptorCatch')
+//         return err
+//       },
+//       responseInterceptor: (res) => {
+//         // console.log('请求拦截器: responseInterceptor')
+//         return res
+//       },
+//       responseInterceptorCatch: (err) => {
+//         // console.log('请求拦截器: responseInterceptorCatch')
+//         return err
+//       },
+//     },
+//   })
+//   .then((res) => {
+//     console.log(res.data)
+//   })
