@@ -14,7 +14,7 @@ class MrRequest {
       },
       (err) => {
         return err
-      },
+      }
     )
     this.instance.interceptors.response.use(
       (res) => {
@@ -22,17 +22,17 @@ class MrRequest {
       },
       (err) => {
         return err
-      },
+      }
     )
 
     // 实例拦截器
     this.instance.interceptors.request.use(
       config.interceptors?.requestInterceptor,
-      config.interceptors?.requestInterceptorCatch,
+      config.interceptors?.requestInterceptorCatch
     )
     this.instance.interceptors.response.use(
       config.interceptors?.responseInterceptor,
-      config.interceptors?.responseInterceptorCatch,
+      config.interceptors?.responseInterceptorCatch
     )
   }
 
@@ -42,19 +42,19 @@ class MrRequest {
       config = config.interceptors.requestInterceptor(config)
     }
     return new Promise<R>((resolve, reject) => {
-      return this.instance
+      this.instance
         .request<any, R>(config)
         .then((res) => {
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
-            resolve(res)
           }
+          resolve(res)
         })
         .catch((err) => {
           if (config.interceptors?.responseInterceptorCatch) {
             err = config.interceptors.responseInterceptorCatch(err)
-            reject(err)
           }
+          reject(err)
         })
     })
   }
