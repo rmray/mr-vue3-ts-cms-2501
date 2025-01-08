@@ -1,31 +1,20 @@
 <script setup lang="ts">
-import useCounterStore from '@/store/modules/counter'
+import router from '@/router'
+import { localCache } from '@/utils/cache'
 
-import '@/utils/request/index'
-
-// 获取store
-const counterStore = useCounterStore()
-
-// 增加计数
-function plus(num: number) {
-  counterStore.plusAction(num)
+/** 退出登录 */
+function hdlLogoutClick() {
+  // 清除本地存储
+  localCache.removeItem('token')
+  // 路由跳转
+  router.push('/login')
 }
-
-// 减少计数
-function minus(num: number) {
-  counterStore.minusAction(num)
-}
-
-// 请求网络
 </script>
 
 <template>
   <div class="main">
-    <div class="show">当前计数：{{ counterStore.count }}</div>
-    <button class="btn-add" @click="plus(5)">+5</button>
-    <button class="btn-add" @click="minus(5)">-5</button>
-
-    <el-button type="primary">按钮1</el-button>
+    <div>main</div>
+    <el-button type="primary" @click="hdlLogoutClick">退出登录</el-button>
   </div>
 </template>
 

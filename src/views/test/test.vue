@@ -1,0 +1,36 @@
+<script setup lang="ts">
+import useCounterStore from '@/store/modules/counter'
+
+import '@/utils/request/index'
+
+// 获取store
+const counterStore = useCounterStore()
+
+// 增加计数
+function plus(num: number) {
+  counterStore.plusAction(num)
+}
+
+// 减少计数
+function minus(num: number) {
+  counterStore.minusAction(num)
+}
+
+// 请求网络
+</script>
+
+<template>
+  <div class="test">
+    <div class="show">当前计数：{{ counterStore.count }}</div>
+    <button class="btn-add" @click="plus(5)">+5</button>
+    <button class="btn-add" @click="minus(5)">-5</button>
+
+    <el-button type="primary">按钮1</el-button>
+  </div>
+</template>
+
+<style lang="less" scoped>
+.test {
+  color: inherit;
+}
+</style>

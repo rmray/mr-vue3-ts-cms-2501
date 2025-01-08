@@ -1,6 +1,6 @@
 import MrRequest from './request'
 import { BASE_URL, TIME_OUT } from './config'
-import type { HomeData } from './type'
+import { localCache } from '../cache'
 
 const mrRequest = new MrRequest({
   baseURL: BASE_URL,
@@ -10,6 +10,10 @@ const mrRequest = new MrRequest({
   interceptors: {
     requestInterceptor: (config) => {
       // console.log('实例拦截器: requestInterceptor')
+      // 携带token
+      if (config.headers) {
+        config.headers.Authorization = 'Bearer ' + localCache.getItem('token') || ''
+      }
       return config
     },
     requestInterceptorCatch: (err: any) => {
@@ -23,8 +27,8 @@ const mrRequest = new MrRequest({
     responseInterceptorCatch: (err) => {
       // console.log('实例拦截器: responseInterceptorCatch')
       return err
-    },
-  },
+    }
+  }
 })
 
 export default mrRequest

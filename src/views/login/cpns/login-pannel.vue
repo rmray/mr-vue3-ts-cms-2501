@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import PaneAccount from './pane-account.vue'
 import PanePhone from './pane-phone.vue'
+import { localCache } from '@/utils/cache'
 
 // 激活面板名称
 const activeName = ref('account')
 
 // 是否记住密码状态
-const isRemPwd = ref(false)
+const isRemPwd = ref<boolean>(localCache.getItem('isRemPwd'))
+watch(isRemPwd, (newValue) => {
+  localCache.setItem('isRemPwd', newValue)
+})
 
 // 点击登录按钮
 const accountRef = ref<InstanceType<typeof PaneAccount>>()
 function hdlLoginClick() {
   if (activeName.value === 'account') {
-    accountRef.value?.accountLogin()
+    accountRef.value?.accountLogin(isRemPwd.value)
   } else {
     console.log('手机登录')
   }

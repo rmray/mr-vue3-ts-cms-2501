@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { Account } from '@/types'
 
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
+
 import useLoginStore from '@/store/modules/login'
+import { localCache } from '@/utils/cache'
 
 // 表单数据模型
-const account = reactive({
-  name: '',
-  password: ''
+const account = reactive<Account>({
+  name: localCache.getItem('name') || '',
+  password: localCache.getItem('password') || ''
 })
 
 // 表单验证规则
@@ -26,11 +29,25 @@ const accountRules: FormRules = {
 // 用户登录
 const accountRef = ref<FormInstance | undefined>()
 const loginStore = useLoginStore()
-function accountLogin() {
+function accountLogin(isRemPwd: boolean) {
   // 表单验证
   accountRef.value?.validate((valid) => {
-    if (!valid) ElMessage.error('请输入正确的账号名和密码')
-    loginStore.loginAction({ name: account.name, password: account.password })
+    if (!valid) {
+      // 失败
+      ElMessage.error('请输入正确的账号名和密码')
+    } else {
+      // 成功，执行登录
+      loginStore.loginAction({ name: account.name, password: account.password })
+
+      // 记住密码
+      if (isRemPwd) {
+        localCache.setItem('name', account.name)
+        localCache.setItem('password', account.password)
+      } else {
+        localCache.removeItem('name')
+        localCache.removeItem('password')
+      }
+    }
   })
 }
 
