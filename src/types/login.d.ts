@@ -42,3 +42,15 @@ export interface UserInfo {
   role: Role
   department: Department
 }
+
+/** 角色菜单 */
+export interface Menu {
+  id: number
+  name: string
+  type: number
+  url: string
+  icon: string
+  sort: number
+  parentId?: number
+  children: Menu[]
+}

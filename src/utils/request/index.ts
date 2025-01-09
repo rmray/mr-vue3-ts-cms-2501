@@ -9,25 +9,16 @@ const mrRequest = new MrRequest({
   // 实例拦截器-使用
   interceptors: {
     requestInterceptor: (config) => {
-      // console.log('实例拦截器: requestInterceptor')
       // 携带token
-      if (config.headers) {
-        config.headers.Authorization = 'Bearer ' + localCache.getItem('token') || ''
+      const token = localCache.getItem('token') || ''
+      if (config.headers && token) {
+        config.headers.Authorization = 'Bearer ' + token
       }
       return config
     },
-    requestInterceptorCatch: (err: any) => {
-      // console.log('实例拦截器: requestInterceptorCatch')
-      return err
-    },
-    responseInterceptor: (res) => {
-      // console.log('实例拦截器: responseInterceptor')
-      return res
-    },
-    responseInterceptorCatch: (err) => {
-      // console.log('实例拦截器: responseInterceptorCatch')
-      return err
-    }
+    requestInterceptorCatch: (err: any) => err,
+    responseInterceptor: (res) => res,
+    responseInterceptorCatch: (err) => err
   }
 })
 
