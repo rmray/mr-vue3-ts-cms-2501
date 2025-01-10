@@ -32,15 +32,15 @@ interface Department {
   leader: string
 }
 export interface UserInfo {
-  id: number
-  name: string
-  createAt: string
-  updateAt: string
-  realname: string
-  cellphone: number
-  enable: number
-  role: Role
-  department: Department
+  id?: number
+  name?: string
+  createAt?: string
+  updateAt?: string
+  realname?: string
+  cellphone?: number
+  enable?: number
+  role?: Role
+  department?: Department
 }
 
 /** 角色菜单 */
@@ -51,6 +51,6 @@ export interface Menu {
   url: string
   icon: string
   sort: number
-  parentId?: number
+  parentId: number
   children: Menu[]
 }
